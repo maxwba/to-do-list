@@ -1,25 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box } from '@chakra-ui/core';
+import Tasklist from './components/tasklist';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // eslint-disable-next-line react/jsx-filename-extension
+    <Box className="App">
+      <Box border="solid" w="60vh" h="100%">
+        <Tasklist />
+      </Box>
+    </Box>
   );
 }
 
