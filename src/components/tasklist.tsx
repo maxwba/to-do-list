@@ -9,6 +9,16 @@ const Tasklist = () => (
     <Box overflowY="auto" position="absolute" top="90px" left="0px" right="0px" bottom="0px">
       <ul>
         <li />
+        <li />
+        <li />
+        <li />
+        <li />
+        <li />
+        <li />
+        <li />
+        <li />
+        <li />
+        <li />
       </ul>
     </Box>
   </Box>
