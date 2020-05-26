@@ -1,12 +1,13 @@
 import React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box, IconButton, Text } from '@chakra-ui/core';
 
 const TasklistNav = () => {
 
   return (
     // eslint-disable-next-line react/jsx-filename-extension
-    <Box border="solid blue" w="100%">
-      <h1>Nav</h1>
+    <Box w="100%" display="flex" alignItems="center" justifyContent="space-between" height="90px">
+      <Text fontSize="3xl">Posts</Text>
+      <IconButton cursor="pointer" variantColor="blue" aria-label="Search database" icon="add" />
     </Box>
   );
 };
