@@ -12,7 +12,9 @@ import {
   Select,
   Textarea,
 } from '@chakra-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field } from 'formik';
+import { createPost, fetchPosts } from '../store/index';
 
 const InputView = () => {
   const validateName = (value) => {
@@ -23,14 +25,22 @@ const InputView = () => {
     return error;
   };
 
+  const generateId = () => Math.random().toString(36).substr(2, 9);
+
+  const state = useSelector((currentState) => currentState);
+  const dispatch = useDispatch();
+
   return (
-    <Box width="60%" display="flex" flexDirection="column" alignContent="center" justifyContent="center" marginBottom="30vh">
+    <Box width="60%" display="flex" flexDirection="column" alignContent="center" justifyContent="center" marginBottom="20vh">
       <Formik
-        initialValues={{ priority: '', title: '' }}
+        initialValues={{
+          id: generateId(), priority: '', title: '', message: '', date: new Date().toLocaleDateString(),
+        }}
         onSubmit={(values, actions) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            dispatch(createPost(values));
             actions.setSubmitting(false);
+            // dispatch(fetchPosts());
           }, 1000);
         }}
       >
@@ -59,33 +69,32 @@ const InputView = () => {
                     <Text>Title</Text>
                   </FormLabel>
                   <Input
-                    width="97%"
+                    width="96%"
                     size="lg"
                     // eslint-disable-next-line react/jsx-props-no-spreading
                     {...field}
                     type="name"
                     id="title"
-                    placeholder="Task title"
                   />
                   <FormErrorMessage>{form.errors.title}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            <Field name="message">
+            <Field name="message" validate={validateName}>
               {({ field, form }) => (
                 <FormControl marginTop="10px" isInvalid={form.errors.message && form.touched.message}>
                   <FormLabel htmlFor="name">
                     <Text>Message</Text>
                   </FormLabel>
                   <Textarea
-                    width="97%"
+                    width="96%"
                     size="lg"
                     // eslint-disable-next-line react/jsx-props-no-spreading
                     {...field}
                     type="name"
                     id="message"
-                    placeholder="Task message"
                   />
+                  <FormErrorMessage>{form.errors.message}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
@@ -93,7 +102,7 @@ const InputView = () => {
               cursor="pointer"
               mt={10}
               variantColor="blue"
-              isLoading={props.isSubmitting}
+              isLoading={props.isSubmitting} // TOTTDO LOADING THE BUTTON WITH isSavingPost
               type="submit"
               float="right"
             >
