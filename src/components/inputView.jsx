@@ -34,7 +34,7 @@ const InputView = () => {
     <Box width="60%" display="flex" flexDirection="column" alignContent="center" justifyContent="center" marginBottom="20vh">
       <Formik
         initialValues={{
-          id: generateId(), priority: '', title: '', message: '', date: new Date().toLocaleDateString(),
+          id: generateId(), priority: '', title: '', message: '', date: new Date().getTime(),
         }}
         onSubmit={(values, actions) => {
           setTimeout(() => {

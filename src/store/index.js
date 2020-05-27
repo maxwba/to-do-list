@@ -36,7 +36,7 @@ export const setIsSavingPost = (value) => ({
 export const fetchPosts = () => async (dispatch) => {
   dispatch(setIsLoadingPosts(true)); // { type: 'SET_IS_LOADING_POSTS', payload: true }
   try {
-    const response = await axios.get('http://localhost:3000/posts');
+    const response = await axios.get('http://localhost:3000/posts?_sort=date&_order=desc');
     dispatch(setPosts(response.data));
   } catch (error) {
     console.log(error);
