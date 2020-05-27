@@ -11,6 +11,7 @@ import {
   Input,
   Select,
   Textarea,
+  Heading,
 } from '@chakra-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field } from 'formik';
@@ -25,22 +26,20 @@ const InputView = () => {
     return error;
   };
 
-  const generateId = () => Math.random().toString(36).substr(2, 9);
-
   const state = useSelector((currentState) => currentState);
   const dispatch = useDispatch();
 
   return (
     <Box width="60%" display="flex" flexDirection="column" alignContent="center" justifyContent="center" marginBottom="20vh">
+      <Heading>New Post</Heading>
       <Formik
         initialValues={{
-          id: generateId(), priority: '', title: '', message: '', date: new Date().getTime(),
+          priority: '', title: state.currentPost.title || '', message: '', date: new Date().getTime(),
         }}
         onSubmit={(values) => {
           dispatch(createPost(values));
         }}
       >
-
         {(props) => (
           <form onSubmit={props.handleSubmit}>
             <Field name="priority" validate={validateName}>
@@ -98,11 +97,11 @@ const InputView = () => {
               cursor="pointer"
               mt={10}
               variantColor="blue"
-              isLoading={state.isSavingPost} // TOTTDO LOADING THE BUTTON WITH isSavingPost
+              isLoading={state.isSavingPost}
               type="submit"
               float="right"
             >
-              Save
+              Create
             </Button>
           </form>
         )}
