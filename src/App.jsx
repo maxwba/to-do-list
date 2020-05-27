@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, ThemeProvider } from '@chakra-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ListView from './components/ListView';
 import DetailView from './components/DetailView';
 import FormView from './components/FormView';
-import { fetchPosts } from './store/index';
 
 function App() {
   const state = useSelector((currentState) => currentState);
-  const dispatch = useDispatch();
 
   return (
     <Box>
