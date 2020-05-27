@@ -26,10 +26,13 @@ export const setPosts = (posts) => ({
   payload: posts,
 });
 
-export const setIsSavingPost = (value) => ({
-  type: SET_IS_SAVING_POST,
-  payload: value,
-});
+export const setIsSavingPost = (value) => {
+  console.log(value);
+  return {
+    type: SET_IS_SAVING_POST,
+    payload: value,
+  };
+};
 
 
 // ASYNC ACTIONS - fetch, create, save and delete
@@ -48,7 +51,7 @@ export const createPost = (postDetails) => async (dispatch) => {
   dispatch(setIsSavingPost(true));
   try {
     await axios.post('http://localhost:3000/posts', postDetails);
-    await dispatch(fetchPosts());
+    dispatch(fetchPosts());
   } catch (error) {
     console.log(error);
   }

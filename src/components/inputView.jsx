@@ -36,12 +36,8 @@ const InputView = () => {
         initialValues={{
           id: generateId(), priority: '', title: '', message: '', date: new Date().getTime(),
         }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            dispatch(createPost(values));
-            actions.setSubmitting(false);
-            // dispatch(fetchPosts());
-          }, 1000);
+        onSubmit={(values) => {
+          dispatch(createPost(values));
         }}
       >
 
@@ -102,7 +98,7 @@ const InputView = () => {
               cursor="pointer"
               mt={10}
               variantColor="blue"
-              isLoading={props.isSubmitting} // TOTTDO LOADING THE BUTTON WITH isSavingPost
+              isLoading={state.isSavingPost} // TOTTDO LOADING THE BUTTON WITH isSavingPost
               type="submit"
               float="right"
             >

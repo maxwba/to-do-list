@@ -44,7 +44,7 @@ const Tasklist = () => {
                   <Box background={priorityBackground(post.priority)} marginRight="15px" width="25px" height="25px" borderRadius="50%" />
                   <Heading fontSize="xl">{post.title}</Heading>
                 </Box>
-                <Text>{post.date}</Text>
+                <Text>{new Date(post.date).toLocaleString()}</Text>
               </Box>
               <Text mt={4}>{post.message}</Text>
             </PseudoBox>
