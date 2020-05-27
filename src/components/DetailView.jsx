@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field } from 'formik';
-import { editPost } from '../store/index';
+import { editPost, deletePost } from '../store/index';
 
 const InputView = () => {
   const validateName = (value) => {
@@ -33,7 +33,7 @@ const InputView = () => {
   return (
     <Box width="60%" display="flex" flexDirection="column" alignContent="center" justifyContent="center" marginBottom="20vh">
       {state.isLoadingPost ? (
-        <Box d="flex" justifyContent="center">
+        <Box d="flex" justifyContent="center" alignItems="center">
           <Spinner
             thickness="4px"
             speed="0.65s"
@@ -96,6 +96,8 @@ const InputView = () => {
                         <Textarea
                           width="96%"
                           size="lg"
+                          fontSize="18px"
+                          fontFamily="sans-serif"
                           // eslint-disable-next-line react/jsx-props-no-spreading
                           {...field}
                           type="name"
@@ -106,15 +108,28 @@ const InputView = () => {
                     )}
                   </Field>
                   <Button
+                    border="aliceblue"
                     cursor="pointer"
                     mt={10}
                     variantColor="blue"
                     isLoading={state.isSavingPost}
                     type="submit"
-                    // onClick={() => dispatch(setIsSavingPost(false))}
                     float="right"
                   >
                     Save
+                  </Button>
+                  <Button
+                    border="aliceblue"
+                    cursor="pointer"
+                    mt={10}
+                    variantColor="pink"
+                    isLoading={state.isSavingPost}
+                    // type="submit"
+                    onClick={() => dispatch(deletePost(state.currentPost.id))}
+                    float="right"
+                    marginRight="20px"
+                  >
+                    Delete
                   </Button>
                 </form>
               )}

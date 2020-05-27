@@ -8,10 +8,9 @@ const TasklistNav = () => {
   const dispatch = useDispatch();
 
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <Box background="#f1f3f7" padding="0 20px" display="flex" alignItems="center" justifyContent="space-between" height="90px">
       <Text fontSize="3xl">Posts</Text>
-      <IconButton onClick={() => dispatch(setCurrentPost())} cursor="pointer" variantColor="blue" aria-label="Search database" icon="add" />
+      <IconButton onClick={() => dispatch(setCurrentPost())} border="aliceblue" cursor="pointer" variantColor="blue" aria-label="Search database" icon="add" />
     </Box>
   );
 };

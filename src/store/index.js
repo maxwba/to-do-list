@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
@@ -73,6 +72,18 @@ export const editPost = (postDetails) => async (dispatch) => {
   dispatch(setIsSavingPost(true));
   try {
     await axios.put(`http://localhost:3000/posts/${postDetails.id}`, postDetails);
+    dispatch(fetchPosts());
+    dispatch(setCurrentPost(postDetails));
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch(setIsSavingPost(false));
+};
+
+export const deletePost = (postDetails) => async (dispatch) => {
+  dispatch(setIsSavingPost(true));
+  try {
+    await axios.delete(`http://localhost:3000/posts/${postDetails}`);
     dispatch(fetchPosts());
     dispatch(setCurrentPost(postDetails));
   } catch (error) {
