@@ -5,6 +5,7 @@ import { waitFor, wait } from '@testing-library/dom';
 import MockAdapter from 'axios-mock-adapter';
 import '@testing-library/jest-dom';
 import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event';
 
 
 import store from './store/index';
@@ -36,6 +37,10 @@ mock.onGet('http://localhost:3000/posts?_sort=date&_order=desc').reply(200,
     date: 1590655795576,
   }]);
 
+mock.onPost('http://localhost:3000/posts').reply((config) => {
+  return mock.onGet('http://localhost:3000/posts?_sort=date&_order=desc').reply(200, [{}]);
+});
+
 test('The forms validation is showing', async () => {
   const { getAllByText, getByText } = render(<Provider store={store}><App /></Provider>);
   await waitFor(() => expect(getByText('New Post')).toBeInTheDocument());
@@ -65,19 +70,14 @@ test('Contains a row for each post in the list from the API response', async () 
 });
 
 test('The form submit the correct data', async () => {
-  const { getAllByText, getAllByTestId, getByTestId, getByText } = render(<Provider store={store}><App /></Provider>);
+  const { getAllByTestId, getByTestId, getByText } = render(<Provider store={store}><App /></Provider>);
   await waitFor(() => expect(getByTestId('post-list')).toBeInTheDocument());
   expect(getAllByTestId('post-card').length).toEqual(3);
-  fireEvent.click(getByTestId('render-post-view'));
+  await act(async () => fireEvent.click(getByTestId('render-post-view')));
   expect(getByText('New Post')).toBeInTheDocument();
-  // fireEvent.click(getByTestId('priority-field'));
-  fireEvent.change(getByTestId('priority-field'), { target: { value: 'high' } });
-  // fireEvent.click(getByTestId('priority-high'));
-  // expect(getByText('High')).not.toBeInTheDocument();
-  // fireEvent.click(getByText('High'));
-  // fireEvent.click(getByTestId('title-field'));
-  // fireEvent.keyPress(getByTestId('title-field'), { key: 'M', code: 'KeyM' });
-  // fireEvent.keyPress(getByTestId('message-field'), { key: 'A', code: 'KeyA' });
+  await act(async () => fireEvent.change(getByTestId('priority-field'), { target: { value: 'high' } }));
+  await act(async () => userEvent.type(getByTestId('title-field'), 'Max'));
+  await act(async () => userEvent.type(getByTestId('message-field'), 'The best candidate for your company =D'));
   await act(async () => fireEvent.click(getByText('Create')));
-  expect(getAllByText('Is required').length).not.toBe(2);
+  await act(async () => expect(getAllByTestId('post-card').length).toEqual(4));
 });
