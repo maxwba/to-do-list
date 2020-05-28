@@ -37,9 +37,7 @@ mock.onGet('http://localhost:3000/posts?_sort=date&_order=desc').reply(200,
     date: 1590655795576,
   }]);
 
-mock.onPost('http://localhost:3000/posts').reply((config) => {
-  return mock.onGet('http://localhost:3000/posts?_sort=date&_order=desc').reply(200, [{}]);
-});
+mock.onPost('http://localhost:3000/posts').replyOnce(200);
 
 test('The forms validation is showing', async () => {
   const { getAllByText, getByText } = render(<Provider store={store}><App /></Provider>);
@@ -79,5 +77,7 @@ test('The form submit the correct data', async () => {
   await act(async () => userEvent.type(getByTestId('title-field'), 'Max'));
   await act(async () => userEvent.type(getByTestId('message-field'), 'The best candidate for your company =D'));
   await act(async () => fireEvent.click(getByText('Create')));
-  await act(async () => expect(getAllByTestId('post-card').length).toEqual(4));
+  expect(mock.history.post.length).toBe(1);
+  expect(mock.history.post[0].data).toContain('high' && 'Max' && 'The best candidate for your company =D');
+  // await act(async () => expect(getAllByTestId('post-card').length).toEqual(4));
 });
