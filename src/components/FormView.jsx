@@ -60,8 +60,8 @@ const InputView = () => {
                       <FormLabel htmlFor="select">
                         <Text>Priority</Text>
                       </FormLabel>
-                      <Select data-testid="priority-field" size="lg" icon="arrow-up-down" iconSize={3} {...field} id="priority" placeholder="Choose one">
-                        <option data-testid="priority-high" value="high">High</option>
+                      <Select data-testid="priority-field" size="lg" icon="arrow-up-down" {...field} id="priority" placeholder="Choose one">
+                        <option data-testid="priority-high" key="high" value="high">High</option>
                         <option value="medium">Medium</option>
                         <option value="low">Low</option>
                       </Select>

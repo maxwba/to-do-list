@@ -70,13 +70,14 @@ test('The form submit the correct data', async () => {
   expect(getAllByTestId('post-card').length).toEqual(3);
   fireEvent.click(getByTestId('render-post-view'));
   expect(getByText('New Post')).toBeInTheDocument();
-  fireEvent.click(getByTestId('priority-field'));
-  fireEvent.click(getByTestId('priority-high'));
+  // fireEvent.click(getByTestId('priority-field'));
+  fireEvent.change(getByTestId('priority-field'), { target: { value: 'high' } });
+  // fireEvent.click(getByTestId('priority-high'));
   // expect(getByText('High')).not.toBeInTheDocument();
   // fireEvent.click(getByText('High'));
   // fireEvent.click(getByTestId('title-field'));
   // fireEvent.keyPress(getByTestId('title-field'), { key: 'M', code: 'KeyM' });
   // fireEvent.keyPress(getByTestId('message-field'), { key: 'A', code: 'KeyA' });
   await act(async () => fireEvent.click(getByText('Create')));
-  expect(getAllByText('Is required').length).not.toBe(3);
+  expect(getAllByText('Is required').length).not.toBe(2);
 });
