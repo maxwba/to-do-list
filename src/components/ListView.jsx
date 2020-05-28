@@ -43,10 +43,10 @@ const Tasklist = () => {
             </Box>
           )
           : (
-            <Box>
+            <Box data-testid="post-list">
               {state.posts.map((post) => (
                 <PseudoBox
-                  className="post-card"
+                  data-testid="post-card"
                   key={post.id}
                   p={5}
                   shadow="md"

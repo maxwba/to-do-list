@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
+import axios from '../axiosApi';
 
 // UTILS
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -53,7 +53,7 @@ export const fetchPosts = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-  setTimeout(() => dispatch(setIsLoadingPosts(false)), 1000);
+  dispatch(setIsLoadingPosts(false));
 };
 
 export const createPost = (postDetails) => async (dispatch) => {

@@ -60,7 +60,7 @@ const InputView = () => {
                         <FormLabel htmlFor="select">
                           <Text>Priority</Text>
                         </FormLabel>
-                        <Select size="lg" icon="arrow-up-down" iconSize={3} {...field} id="priority" placeholder="Choose one">
+                        <Select data-testid="priority-filled-field" size="lg" icon="arrow-up-down" iconSize={3} {...field} id="priority" placeholder="Choose one">
                           <option value="high">High</option>
                           <option value="medium">Medium</option>
                           <option value="low">Low</option>
@@ -76,6 +76,7 @@ const InputView = () => {
                           <Text>Title</Text>
                         </FormLabel>
                         <Input
+                          data-testid="title-filled-field"
                           width="96%"
                           size="lg"
                           // eslint-disable-next-line react/jsx-props-no-spreading
@@ -94,6 +95,7 @@ const InputView = () => {
                           <Text>Message</Text>
                         </FormLabel>
                         <Textarea
+                          data-testid="message-filled-field"
                           width="96%"
                           size="lg"
                           fontSize="18px"
