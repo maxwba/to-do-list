@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
-import { waitFor, wait } from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 import MockAdapter from 'axios-mock-adapter';
 import '@testing-library/jest-dom';
 import { act } from 'react-dom/test-utils';
