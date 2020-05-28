@@ -18,7 +18,6 @@ export const SET_CURRENT_POST = 'SET_CURRENT_POST';
 export const SET_IS_LOADING_POST = 'SET_IS_LOADING_POST';
 
 // ACTIONS
-
 export const setIsLoadingPosts = (value) => ({
   type: SET_IS_LOADING_POSTS,
   payload: value,
@@ -54,7 +53,7 @@ export const fetchPosts = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-  dispatch(setIsLoadingPosts(false));
+  setTimeout(() => dispatch(setIsLoadingPosts(false)), 1000);
 };
 
 export const createPost = (postDetails) => async (dispatch) => {
@@ -89,7 +88,7 @@ export const deletePost = (postDetails) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-  dispatch(setIsSavingPost(false));
+  setTimeout(() => dispatch(setIsSavingPost(false)));
 };
 
 export const onSetCurrentPost = (post) => async (dispatch) => {
